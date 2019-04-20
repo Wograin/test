@@ -1,5 +1,5 @@
-//function firstTask() {
-//    'use strict';
+function firstTask() {
+    'use strict';
     
     let money = +prompt("Ваш бюджет на месяц?", "8164");
     let time = prompt("Введите дату в формате YYYY-MM-DD", "2019-04-18");
@@ -41,6 +41,6 @@
     } else {
         console.log("ИДИ РАБОТАТЬ ! ! !");
     }    
-//}
+}
 
-//firstTask();
+firstTask();
