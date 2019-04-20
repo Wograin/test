@@ -23,6 +23,7 @@ function firstTask() {
             console.log("Done!");
             appData.expenses[utilityFee] = salary;
         } else {
+            alert("Необходимо указать данные!");
             i--;
         }
     }
