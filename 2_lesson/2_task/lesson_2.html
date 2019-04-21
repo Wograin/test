@@ -1,0 +1,47 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <script src="js_lesson_2.js"></script>
+        <style>
+            .alert {
+                width: 125px;
+                border: 1px solid #a496df;
+                border-radius: 4px;
+                color: #000000;
+                background-color: #dbd8f0;
+                padding: 15px;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script>
+            let week = ["понедельник", "вторник", "среда", "четверг", "пятница", "суббота", "воскресенье"];
+            
+            for(let i = 0; i < week.length; i++) {
+
+                let d = "",
+                    toDay;
+
+                if( week[i] === "суббота" || week[i] === "воскресенье" && week[i] == toDay ) {
+                    d = "<b>" + week[i] + "</b>";
+                } else if ( week[i] === "суббота" || week[i] === "воскресенье" ) {
+                    d = "<b><em>" + week[i] + "</em></b>";
+                } else {
+                    d = week[i];
+                }
+                let div = document.createElement('div');
+                div.className = "alert";
+                div.innerHTML = d;
+                document.body.appendChild(div);
+            };
+        </script>
+    </body>
+    
+    </html>
