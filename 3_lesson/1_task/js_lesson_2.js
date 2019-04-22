@@ -75,7 +75,7 @@ function firstTask() {
             let entryExpenses = prompt("Статья необязательных расходов?", "");
 
             if (typeof (entryExpenses) === "string" && entryExpenses != null && entryExpenses != "") {
-                appData.optionalExpenses[1] = entryExpenses;
+                appData.optionalExpenses[i] = entryExpenses;
             } else {
                 alert("Необходимо указать данные!");
                 i--;
