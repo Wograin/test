@@ -27,18 +27,17 @@
         for (let i = 0; i < week.length; i++) {
 
             let d = "",
-                toDay = "суббота";
+                toDay = "воскресенье";
 
-            if ( (week[i] === toDay) && (week[i] !== "суббота" || week[i] !== "воскресенье") ) {
-                d = "<em>" + week[i] + "</em>";
+            if ((week[i] === "суббота" || week[i] === "воскресенье") && week[i] === toDay) {
+                d = "<b><em>" + week[i] + "</em></b>";
             } else if (week[i] === "суббота" || week[i] === "воскресенье") {
                 d = "<b>" + week[i] + "</b>";
-            } else if ((week[i] === "суббота" || week[i] === "воскресенье") && week[i] === toDay) {
-                d = "<em><b>" + week[i] + "</b></em>";
+            } else if (week[i] === toDay) {
+                d = "<em>" + week[i] + "</em>";
             } else {
                 d = week[i];
             }
-
             let div = document.createElement('div');
             div.className = "alert";
             div.innerHTML = d;
