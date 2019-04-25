@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!--script src="js_lesson_5.js"></script-->
+</head>
+
+<body>
+    <script>
+        let result;
+        let arr = [];
+
+        for (var i = 1; i <= 100; i++) {
+            for (var j = 2; j <= i; j++) {
+                if (i % j == 0)
+                    break;
+            }
+            if (j == i) {
+                result = i + (" - " + "Делители этого числа: " + 1 + " и " + j + ";");
+                let div = document.createElement('div');
+                div.innerHTML = result;
+                document.body.appendChild(div);
+            }
+        }
+    </script>
+</body>
+
+</html>
