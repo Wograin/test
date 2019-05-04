@@ -36,10 +36,13 @@ window.addEventListener("DOMContentLoaded", function () {
     });
     //------------------TIMER--------------------------------------------------------------------------------------------------------
 
-    let deadLine = "2019-05-04";
+    let deadLine = "2019-05-06";
 
     function getTimeRemaining(endtime) {
-        let t = Date.parse(endtime) - Date.parse(new Date()),
+        let timeZone = new Date().getTimezoneOffset() * 1000 * 60;
+        //let t = Date.parse(endtime) - Date.parse(new Date()),
+        //let t = Date.parse(endtime) - Date.parse(new Date()) + ((new Date().getTimezoneOffset()) * 1000 * 60),
+        let t = Date.parse(endtime) - Date.parse(new Date()) + timeZone,        
             seconds = Math.floor((t / 1000) % 60),
             minutes = Math.floor((t / 1000 / 60) % 60),
             hours = Math.floor((t / (1000 * 60 * 60)));

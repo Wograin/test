@@ -36,10 +36,11 @@ window.addEventListener("DOMContentLoaded", function () {
     });
     //------------------TIMER--------------------------------------------------------------------------------------------------------
 
-    let deadLine = "2019-05-04";
+    let deadLine = "2019-05-05";
 
     function getTimeRemaining(endtime) {
-        let t = Date.parse(endtime) - Date.parse(new Date()),
+        let timeZone = new Date().getTimezoneOffset() * 1000 * 60,
+            t = Date.parse(endtime) - Date.parse(new Date()) + timeZone,
             seconds = Math.floor((t / 1000) % 60),
             minutes = Math.floor((t / 1000 / 60) % 60),
             hours = Math.floor((t / (1000 * 60 * 60)));
@@ -62,22 +63,22 @@ window.addEventListener("DOMContentLoaded", function () {
 
         function updateClock() {
             let t = getTimeRemaining(endtime);
-            
-            hours.textContent = t.hours; 
+
+            hours.textContent = t.hours;
             if (t.hours < 10) {
-                hours.textContent = "0" + t.hours; 
+                hours.textContent = "0" + t.hours;
             }
 
             minutes.textContent = t.minutes;
             if (t.minutes < 10) {
-                minutes.textContent = "0" + t.minutes; 
+                minutes.textContent = "0" + t.minutes;
             }
-            
+
             seconds.textContent = t.seconds;
             if (t.seconds < 10) {
-                seconds.textContent = "0" + t.seconds; 
+                seconds.textContent = "0" + t.seconds;
             }
-           
+
             if (t.total < 0) {
                 clearInterval(timeInterval);
                 hours.textContent = "00";
