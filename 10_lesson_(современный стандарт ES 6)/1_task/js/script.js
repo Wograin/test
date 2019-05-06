@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("DOMContentLoaded", () => {
 
     'use strict';
     //------------------TAB'ы--------------------------------------------------------------------------------------------------------
@@ -6,23 +6,23 @@ window.addEventListener("DOMContentLoaded", function () {
         info = document.querySelector(".info-header"),
         tabContent = document.querySelectorAll(".info-tabcontent");
 
-    function hideTabContent(a) {
+    let hideTabContent = (a) => {
         for (let i = a; i < tabContent.length; i++) {
             tabContent[i].classList.remove("show");
             tabContent[i].classList.add("hide");
         }
-    }
+    };
 
     hideTabContent(1);
 
-    function showTabContent(b) {
+    let showTabContent = (b) => {
         if (tabContent[b].classList.contains("hide")) {
             tabContent[b].classList.remove("hide");
             tabContent[b].classList.add("show");
         }
-    }
+    };
 
-    info.addEventListener("click", function (event) {
+    info.addEventListener("click", (event) => {
         let target = event.target;
         if (target && target.classList.contains("info-header-tab")) {
             for (let i = 0; i < tab.length; i++) {
@@ -36,7 +36,7 @@ window.addEventListener("DOMContentLoaded", function () {
     });
     //------------------TIMER--------------------------------------------------------------------------------------------------------
 
-    let deadLine = "2019-05-06";
+    let deadLine = "2019-05-07";
 
     function getTimeRemaining(endtime) {
         let timeZone = new Date().getTimezoneOffset() * 1000 * 60;
@@ -68,17 +68,17 @@ window.addEventListener("DOMContentLoaded", function () {
 
             hours.textContent = t.hours;
             if (t.hours < 10) {
-                hours.textContent = "0" + t.hours;
+                hours.textContent = `0${t.hours}`;
             }
 
             minutes.textContent = t.minutes;
             if (t.minutes < 10) {
-                minutes.textContent = "0" + t.minutes;
+                minutes.textContent = `0${t.minutes}`;
             }
 
             seconds.textContent = t.seconds;
             if (t.seconds < 10) {
-                seconds.textContent = "0" + t.seconds;
+                seconds.textContent = `0${t.seconds}`;
             }
 
             if (t.total <= 0) {
@@ -98,11 +98,11 @@ window.addEventListener("DOMContentLoaded", function () {
         close = document.querySelector(".popup-close"),
         btnDescription = document.querySelectorAll(".description-btn");
 
-    function callDescriptionBtn() {
+    let callDescriptionBtn = () => {
         overlay.style.display = "block";
         more.classList.add("more-splash");
         document.body.style.overflow = "hidden";
-    }
+    };
 
     more.addEventListener("click", callDescriptionBtn);
 
