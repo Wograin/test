@@ -157,7 +157,7 @@ window.addEventListener("DOMContentLoaded", () => {
         request.addEventListener("readystatechange", function () {
             if (request.readyState < 4) {
                 statusMessage.innerHTML = message.loading;
-            } else if (request.readySate === 4 && request.starus == 200) {
+            } else if (request.readyState === 4 && request.status == 200) {
                 statusMessage.innerHTML = message.success;
             } else {
                 statusMessage.innerHTML = message.failure;
@@ -206,7 +206,7 @@ window.addEventListener("DOMContentLoaded", () => {
         request.addEventListener("readystatechange", () => {
             if (request.readyState < 4) {
                 statusMessage.innerHTML = message.loading;
-            } else if (request.readySate === 4 && request.starus == 200) {
+            } else if (request.readyState === 4 && request.status == 200) {
                 statusMessage.innerHTML = message.success;
             } else {
                 statusMessage.innerHTML = message.failure;
