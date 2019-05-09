@@ -128,21 +128,21 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     let form = document.querySelector(".main-form"),
-        input = form.getElementsByTagName("input"),
+        input = document.getElementsByTagName("input"),
         statusMessage = document.createElement("div");
 
     statusMessage.classList.add("status");
 
-    function getForm(form1) {
-        form1.addEventListener("submit", (event) => {
+    function sendForm(element) {
+        element.addEventListener("submit", (event) => {
             event.preventDefault();
-            form1.appendChild(statusMessage);
+            element.appendChild(statusMessage);
 
             let request = new XMLHttpRequest();
             request.open("POST", "server.php");
             request.setRequestHeader("Content-type", "application/json; charset=utf-8");
 
-            let formData = new FormData(form1);
+            let formData = new FormData(element);
 
             let obj = {};
             formData.forEach(function (value, key) {
@@ -168,7 +168,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    getForm(form);
+    sendForm(form);
 
     //------------------FORMA к Контактной форме (мы с вами свяжемся)----------------------------------------------------------------
 
@@ -184,6 +184,6 @@ window.addEventListener("DOMContentLoaded", () => {
         contactInputPhone.value = contactInputPhone.value.replace(/[^+0-9]/ig, "");
     });
 
-    getForm(contactForm);
+    sendForm(contactForm);
 
 });
