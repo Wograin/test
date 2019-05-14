@@ -93,6 +93,37 @@ window.addEventListener("DOMContentLoaded", () => {
 
     setClock("timer", deadLine);
 
+//------------------Плавная прокрутка страницы--------------------------------------------------------------------------------------------------------
+
+    let allLi = document.getElementsByTagName("li"),
+        allHref = document.querySelectorAll("ul > li > a");
+    //allHref = document.querySelectorAll('a[href*="#"]');
+
+    for (let i = 0; i < allLi.length; i++) {
+        let li = allLi[i];
+        li.addEventListener("click", function (event) {
+            event.preventDefault();
+        });
+    }
+
+    function goToTheBlock(collection) {
+
+        for (let j = 0; j < collection.length; j++) {
+
+            let link = collection[j],
+                href = collection[j].getAttribute("href");
+
+            link.addEventListener("click", () => {
+                document.querySelector(href).scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            });
+        }
+    }
+    goToTheBlock(allHref);
+
+
     //------------------MODAL WINDOW--------------------------------------------------------------------------------------------------------
 
     let more = document.querySelector(".more"),
@@ -149,9 +180,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
                     request.addEventListener("readystatechange", function () {
                         if (request.readyState < 4) {
-                            resolve();                       
+                            resolve();
                         } else if (request.readyState === 4 && request.status == 200) {
-                            resolve(); 
+                            resolve();
                         } else {
                             reject();
                         }
@@ -167,7 +198,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
                     request.send(json);
                 });
-            }  //Конец нашей функции postData
+            } //Конец нашей функции postData
 
             function clearInput() {
                 for (let i = 0; i < input.length; i++) {
