@@ -24,6 +24,5 @@ $(document).ready(function () {
         $(".modal").animate({
             height: "hide"
         }, 1500);
-
     });
 });
