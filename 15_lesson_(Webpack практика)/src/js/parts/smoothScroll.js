@@ -1,4 +1,4 @@
-function smoothScroll() {
+let smoothScroll = () => {
     let allLi = document.getElementsByTagName("li"),
         allHref = document.querySelectorAll("ul > li > a");
 
@@ -26,6 +26,6 @@ function smoothScroll() {
         }
     }
     goToTheBlock(allHref);
-}
+};
 
 module.exports = smoothScroll;

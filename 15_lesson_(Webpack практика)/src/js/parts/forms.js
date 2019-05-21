@@ -1,4 +1,4 @@
-function forms(){
+let forms = () => {
     let message = {
         loading: "загрузка...",
         success: "Спасибо! Скоро мы с вами свяжемся!",
@@ -72,10 +72,10 @@ function forms(){
     statusMessage.classList.add("status");
 
     contactInputPhone.addEventListener("input", () => {
-        contactInputPhone.value = contactInputPhone.value.replace(/[^+0-9]/ig, "");
+        contactInputPhone.value = '+' + contactInputPhone.value.replace(/[^\d]/g, '').slice(0, 11);
     });
 
     sendForm(contactForm);
-}
+};
 
 module.exports = forms;

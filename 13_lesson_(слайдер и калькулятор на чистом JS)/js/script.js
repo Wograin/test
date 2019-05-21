@@ -37,7 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     //------------------TIMER--------------------------------------------------------------------------------------------------------
 
-    let deadLine = "2019-05-15";
+    let deadLine = "2019-05-19";
 
     function getTimeRemaining(endtime) {
         let timeZone = new Date().getTimezoneOffset() * 1000 * 60;
@@ -67,20 +67,16 @@ window.addEventListener("DOMContentLoaded", () => {
         function updateClock() {
             let t = getTimeRemaining(endtime);
 
-            hours.textContent = t.hours;
-            if (t.hours < 10) {
-                hours.textContent = `0${t.hours}`;
+            function myFunc(elem, v) {
+                elem.textContent = v;
+                if (v < 10) {
+                    elem.textContent = `0${v}`;
+                }
             }
 
-            minutes.textContent = t.minutes;
-            if (t.minutes < 10) {
-                minutes.textContent = `0${t.minutes}`;
-            }
-
-            seconds.textContent = t.seconds;
-            if (t.seconds < 10) {
-                seconds.textContent = `0${t.seconds}`;
-            }
+            myFunc(hours, t.hours);
+            myFunc(minutes, t.minutes);
+            myFunc(seconds, t.seconds);
 
             if (t.total <= 0) {
                 clearInterval(timeInterval);
@@ -88,7 +84,29 @@ window.addEventListener("DOMContentLoaded", () => {
                 minutes.textContent = "00";
                 seconds.textContent = "00";
             }
+            /*hours.textContent = t.hours;
+             if (t.hours < 10) {
+                 hours.textContent = `0${t.hours}`;
+             }
+
+             minutes.textContent = t.minutes;
+             if (t.minutes < 10) {
+                 minutes.textContent = `0${t.minutes}`;
+             }
+
+             seconds.textContent = t.seconds;
+             if (t.seconds < 10) {
+                 seconds.textContent = `0${t.seconds}`;
+             }
+
+             if (t.total <= 0) {
+                 clearInterval(timeInterval);
+                 hours.textContent = "00";
+                 minutes.textContent = "00";
+                 seconds.textContent = "00";
+             }*/
         }
+
     }
 
     setClock("timer", deadLine);
@@ -129,12 +147,16 @@ window.addEventListener("DOMContentLoaded", () => {
     let more = document.querySelector(".more"),
         overlay = document.querySelector(".overlay"),
         close = document.querySelector(".popup-close"),
-        btnDescription = document.querySelectorAll(".description-btn");
+        btnDescription = document.querySelectorAll(".description-btn"),
+        poupFormInput = document.querySelector(".popup-form__input");
 
     let callDescriptionBtn = () => {
         overlay.style.display = "block";
         more.classList.add("more-splash");
         document.body.style.overflow = "hidden";
+        poupFormInput.addEventListener("input", () => {
+            poupFormInput.value = poupFormInput.value.replace(/[^+0-9]/ig, "");
+        });
     };
 
     more.addEventListener("click", callDescriptionBtn);
@@ -227,7 +249,9 @@ window.addEventListener("DOMContentLoaded", () => {
     statusMessage.classList.add("status");
 
     contactInputPhone.addEventListener("input", () => {
-        contactInputPhone.value = contactInputPhone.value.replace(/[^+0-9]/ig, "");
+        //contactInputPhone.value = contactInputPhone.value.replace(/[^+0-9]/ig, "");
+        contactInputPhone.value = '+' + contactInputPhone.value.replace(/[^\d]/g, '').slice(0, 11);
+       
     });
 
     sendForm(contactForm);
@@ -302,8 +326,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
     persons.addEventListener("input", function () {
 
-        this.value = this.value.replace(/[^+0-9]/ig, "");
+        this.value = this.value.replace(/[^0-9]/ig, "");
         personsSum = +this.value;
+
+        if (this.value.charAt(0) === "0") {
+            this.value = "";
+            total = 0;
+        }
 
         if (daysSum != "" && personsSum != "") {
             total = (daysSum + personsSum) * 4000 * koef;
@@ -319,8 +348,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
     restDays.addEventListener("input", function () {
 
-        this.value = this.value.replace(/[^+0-9]/ig, "");
+        this.value = this.value.replace(/[^0-9]/ig, "");
         daysSum = +this.value;
+
+        if (this.value.charAt(0) === "0") {
+            this.value = "";
+            total = 0;
+        }
 
         if (daysSum != "" && personsSum != "") {
             total = (daysSum + personsSum) * 4000 * koef;

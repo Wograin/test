@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function calc() {
+let calc = () => {
     let persons = document.querySelectorAll(".counter-block-input")[0],
         restDays = document.querySelectorAll(".counter-block-input")[1],
         place = document.getElementById("select"),
@@ -101,17 +101,22 @@ function calc() {
         personsSum = 0,
         daysSum = 0,
         total = 0,
-        koef = 1;
+        coef = 1;
 
     totalValue.textContent = 0;
 
     persons.addEventListener("input", function () {
 
-        this.value = this.value.replace(/[^+0-9]/ig, "");
+        this.value = this.value.replace(/[^0-9]/ig, "");
         personsSum = +this.value;
 
+        if (this.value.charAt(0) === "0") {
+            this.value = "";
+            total = 0;
+        }
+
         if (daysSum != "" && personsSum != "") {
-            total = (daysSum + personsSum) * 4000 * koef;
+            total = (daysSum + personsSum) * 4000 * coef;
             if (restDays.value == "") {
                 totalValue.textContent = 0;
             } else {
@@ -127,8 +132,13 @@ function calc() {
         this.value = this.value.replace(/[^+0-9]/ig, "");
         daysSum = +this.value;
 
+        if (this.value.charAt(0) === "0") {
+            this.value = "";
+            total = 0;
+        }
+
         if (daysSum != "" && personsSum != "") {
-            total = (daysSum + personsSum) * 4000 * koef;
+            total = (daysSum + personsSum) * 4000 * coef;
             if (persons.value == "") {
                 totalValue.textContent = 0;
             } else {
@@ -139,16 +149,16 @@ function calc() {
         }
     });
 
-    place.addEventListener("input", function () {
-        koef = this.options[this.selectedIndex].value;
+    place.addEventListener("input", () => {
+        coef = this.options[this.selectedIndex].value;
         if (restDays.value == "" || persons.value == "") {
             totalValue.textContent = 0;
         } else {
-            total = (daysSum + personsSum) * 4000 * koef;
+            total = (daysSum + personsSum) * 4000 * coef;
             totalValue.innerHTML = total;
         }
     });
-}
+};
 
 module.exports = calc;
 
@@ -161,7 +171,7 @@ module.exports = calc;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function forms(){
+let forms = () => {
     let message = {
         loading: "загрузка...",
         success: "Спасибо! Скоро мы с вами свяжемся!",
@@ -235,11 +245,11 @@ function forms(){
     statusMessage.classList.add("status");
 
     contactInputPhone.addEventListener("input", () => {
-        contactInputPhone.value = contactInputPhone.value.replace(/[^+0-9]/ig, "");
+        contactInputPhone.value = '+' + contactInputPhone.value.replace(/[^\d]/g, '').slice(0, 11);
     });
 
     sendForm(contactForm);
-}
+};
 
 module.exports = forms;
 
@@ -252,16 +262,20 @@ module.exports = forms;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function modalWindow(){
+let modalWindow = () => {
     let more = document.querySelector(".more"),
         overlay = document.querySelector(".overlay"),
         close = document.querySelector(".popup-close"),
-        btnDescription = document.querySelectorAll(".description-btn");
+        btnDescription = document.querySelectorAll(".description-btn"),
+        poupFormInput = document.querySelector(".popup-form__input");
 
     let callDescriptionBtn = () => {
         overlay.style.display = "block";
         more.classList.add("more-splash");
         document.body.style.overflow = "hidden";
+        poupFormInput.addEventListener("input", () => {
+            poupFormInput.value = '+' + poupFormInput.value.replace(/[^\d]/g, '').slice(0, 11);
+        });
     };
 
     more.addEventListener("click", callDescriptionBtn);
@@ -276,7 +290,7 @@ function modalWindow(){
         let btn = btnDescription[i];
         btn.addEventListener("click", callDescriptionBtn);
     }
-}
+};
 
 module.exports = modalWindow;
 
@@ -289,7 +303,7 @@ module.exports = modalWindow;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function slider() {
+let slider = () => {
     let slideIndex = 1,
         slides = document.querySelectorAll(".slider-item"),
         prev = document.querySelector(".prev"),
@@ -339,7 +353,7 @@ function slider() {
             }
         }
     });
-}
+};
 
 module.exports = slider;
 
@@ -352,7 +366,7 @@ module.exports = slider;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function smoothScroll() {
+let smoothScroll = () => {
     let allLi = document.getElementsByTagName("li"),
         allHref = document.querySelectorAll("ul > li > a");
 
@@ -380,7 +394,7 @@ function smoothScroll() {
         }
     }
     goToTheBlock(allHref);
-}
+};
 
 module.exports = smoothScroll;
 
@@ -393,7 +407,7 @@ module.exports = smoothScroll;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function tabs() {
+let tabs = () => {
     let tab = document.querySelectorAll(".info-header-tab"),
         info = document.querySelector(".info-header"),
         tabContent = document.querySelectorAll(".info-tabcontent");
@@ -426,11 +440,9 @@ function tabs() {
             }
         }
     });
-}
+};
 
 module.exports = tabs;
-
-
 
 /***/ }),
 
@@ -441,8 +453,8 @@ module.exports = tabs;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function timer() {
-    let deadLine = "2019-05-21";
+let timer = () => {
+    let deadLine = "2019-05-22";
 
     function getTimeRemaining(endtime) {
         let timeZone = new Date().getTimezoneOffset() * 1000 * 60,
@@ -450,7 +462,7 @@ function timer() {
             seconds = Math.floor((t / 1000) % 60),
             minutes = Math.floor((t / 1000 / 60) % 60),
             hours = Math.floor((t / (1000 * 60 * 60)));
-      
+
 
         return {
             "total": t,
@@ -470,20 +482,16 @@ function timer() {
         function updateClock() {
             let t = getTimeRemaining(endtime);
 
-            hours.textContent = t.hours;
-            if (t.hours < 10) {
-                hours.textContent = `0${t.hours}`;
+            function myFunc(elem, v) {
+                elem.textContent = v;
+                if (v < 10) {
+                    elem.textContent = `0${v}`;
+                }
             }
 
-            minutes.textContent = t.minutes;
-            if (t.minutes < 10) {
-                minutes.textContent = `0${t.minutes}`;
-            }
-
-            seconds.textContent = t.seconds;
-            if (t.seconds < 10) {
-                seconds.textContent = `0${t.seconds}`;
-            }
+            myFunc(hours, t.hours);
+            myFunc(minutes, t.minutes);
+            myFunc(seconds, t.seconds);
 
             if (t.total <= 0) {
                 clearInterval(timeInterval);
@@ -495,7 +503,7 @@ function timer() {
     }
 
     setClock("timer", deadLine);
-}
+};
 
 module.exports = timer;
 

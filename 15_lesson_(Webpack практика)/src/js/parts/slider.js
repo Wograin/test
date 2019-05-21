@@ -1,4 +1,4 @@
-function slider() {
+let slider = () => {
     let slideIndex = 1,
         slides = document.querySelectorAll(".slider-item"),
         prev = document.querySelector(".prev"),
@@ -48,6 +48,6 @@ function slider() {
             }
         }
     });
-}
+};
 
 module.exports = slider;

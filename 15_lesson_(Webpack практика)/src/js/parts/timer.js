@@ -1,5 +1,5 @@
-function timer() {
-    let deadLine = "2019-05-21";
+let timer = () => {
+    let deadLine = "2019-05-22";
 
     function getTimeRemaining(endtime) {
         let timeZone = new Date().getTimezoneOffset() * 1000 * 60,
@@ -7,7 +7,7 @@ function timer() {
             seconds = Math.floor((t / 1000) % 60),
             minutes = Math.floor((t / 1000 / 60) % 60),
             hours = Math.floor((t / (1000 * 60 * 60)));
-      
+
 
         return {
             "total": t,
@@ -27,20 +27,16 @@ function timer() {
         function updateClock() {
             let t = getTimeRemaining(endtime);
 
-            hours.textContent = t.hours;
-            if (t.hours < 10) {
-                hours.textContent = `0${t.hours}`;
+            function myFunc(elem, v) {
+                elem.textContent = v;
+                if (v < 10) {
+                    elem.textContent = `0${v}`;
+                }
             }
 
-            minutes.textContent = t.minutes;
-            if (t.minutes < 10) {
-                minutes.textContent = `0${t.minutes}`;
-            }
-
-            seconds.textContent = t.seconds;
-            if (t.seconds < 10) {
-                seconds.textContent = `0${t.seconds}`;
-            }
+            myFunc(hours, t.hours);
+            myFunc(minutes, t.minutes);
+            myFunc(seconds, t.seconds);
 
             if (t.total <= 0) {
                 clearInterval(timeInterval);
@@ -52,6 +48,6 @@ function timer() {
     }
 
     setClock("timer", deadLine);
-}
+};
 
 module.exports = timer;
