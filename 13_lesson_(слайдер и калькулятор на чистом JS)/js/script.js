@@ -369,7 +369,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     place.addEventListener("input", function () {
-        koef = this.options[this.selectedIndex].value;
+        koef = +this.options[this.selectedIndex].value; // не факт, что нужен +
         if (restDays.value == "" || persons.value == "") {
             totalValue.textContent = 0;
         } else {
