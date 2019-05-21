@@ -269,14 +269,14 @@ let modalWindow = () => {
         btnDescription = document.querySelectorAll(".description-btn"),
         poupFormInput = document.querySelector(".popup-form__input");
 
-    let callDescriptionBtn = () => {
+    function callDescriptionBtn() {
         overlay.style.display = "block";
-        more.classList.add("more-splash");
+        this.classList.add("more-splash");
         document.body.style.overflow = "hidden";
         poupFormInput.addEventListener("input", () => {
             poupFormInput.value = '+' + poupFormInput.value.replace(/[^\d]/g, '').slice(0, 11);
         });
-    };
+    }
 
     more.addEventListener("click", callDescriptionBtn);
 
@@ -284,6 +284,9 @@ let modalWindow = () => {
         overlay.style.display = "none";
         more.classList.remove("more-splash");
         document.body.style.overflow = "";
+        btnDescription.forEach(function (elem) {
+            elem.classList.remove('more-splash');
+        });
     });
 
     for (let i = 0; i < btnDescription.length; i++) {
