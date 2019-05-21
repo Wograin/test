@@ -54,8 +54,8 @@ let calc = () => {
         }
     });
 
-    place.addEventListener("input", () => {
-        coef = +this.options[this.selectedIndex].value;
+    place.addEventListener("input", (e) => {
+        coef = +e.target.options[e.target.selectedIndex].value;
         if (restDays.value == "" || persons.value == "") {
             totalValue.textContent = 0;
         } else {
